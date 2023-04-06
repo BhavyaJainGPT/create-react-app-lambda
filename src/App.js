@@ -20,9 +20,7 @@ function App() {
      <QrReader
        delay={300}
        video={true}
-       constraints={{
-        facingMode: "environment"
-    }}
+       facingMode="rear"
        onError={handleError}
        onScan={handleScan}
        style={{width: '100%'}}
