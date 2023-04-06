@@ -39,6 +39,7 @@ function App() {
       </select>
       <div>{data}</div>
      <QrReader
+     ref={qrReaderRef}
        delay={300}
        video={true}
        facingMode={activeDeviceId ? undefined : 'environment'}
