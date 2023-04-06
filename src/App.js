@@ -23,7 +23,7 @@ function App() {
        onScan={handleScan}
        style={{width: '100%'}}
        />
-       <p>{data?.text}</p>
+       <p>{data.text}</p>
     </div>
   );
 }
