@@ -19,7 +19,9 @@ function App() {
       <div>{data}</div>
      <QrReader
        delay={300}
-       constraints={ {facingMode: 'environment'} }
+       constraints={{
+        facingMode: "environment"
+    }}
        onError={handleError}
        onScan={handleScan}
        style={{width: '100%'}}
