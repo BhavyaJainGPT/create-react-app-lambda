@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import QrReader from 'react-qr-scanner'
 import React,{useState} from 'react';
@@ -23,7 +23,7 @@ function App() {
        onScan={handleScan}
        style={{width: '100%'}}
        />
-       <p>{data.text}</p>
+       <p>{data?.text}</p>
     </div>
   );
 }
