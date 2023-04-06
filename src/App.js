@@ -17,13 +17,14 @@ function App() {
   return (
     <div className="App">
       <div>QR Scanner Web view test</div>
+      <div>{data.text}</div>
      <QrReader
        delay={300}
        onError={handleError}
        onScan={handleScan}
        style={{width: '100%'}}
        />
-       <p>{data.text}</p>
+      
     </div>
   );
 }
