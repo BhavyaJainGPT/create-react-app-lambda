@@ -1,39 +1,41 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import QrScanner from 'react-qr-scanner';
 
-const QrScanner = () => {
-  const [isScanning, setIsScanning] = useState(false);
-  const [cameraFacingMode, setCameraFacingMode] = useState('environment');
-  const videoRef = useRef(null);
+function App() {
+  const [devices, setDevices] = useState([]);
+  const [selectedDeviceId, setSelectedDeviceId] = useState(null);
 
   useEffect(() => {
-    const constraints = { video: { facingMode: cameraFacingMode } };
-    navigator.mediaDevices
-      .getUserMedia(constraints)
-      .then((stream) => {
-        videoRef.current.srcObject = stream;
-        setIsScanning(true);
-      })
-      .catch((error) => console.error(error));
+    navigator.mediaDevices.enumerateDevices().then((devices) => {
+      setDevices(devices.filter((device) => device.kind === 'videoinput'));
+    });
+  }, []);
 
-    return () => {
-      if (isScanning) {
-        videoRef.current.srcObject.getTracks()[0].stop();
-      }
-    };
-  }, [isScanning, cameraFacingMode]);
+  const handleScan = (data) => {
+    console.log(data);
+  };
 
-  const handleSwitchCamera = () => {
-    setCameraFacingMode((prevMode) =>
-      prevMode === 'environment' ? 'user' : 'environment'
-    );
+  const handleDeviceChange = (event) => {
+    setSelectedDeviceId(event.target.value);
   };
 
   return (
     <div>
-      <video ref={videoRef} autoPlay={true} />
-      <button onClick={handleSwitchCamera}>Switch Camera</button>
+      <select value={selectedDeviceId} onChange={handleDeviceChange}>
+        {devices.map((device) => (
+          <option key={device.deviceId} value={device.deviceId}>
+            {device.label}
+          </option>
+        ))}
+      </select>
+      <QrScanner
+        delay={300}
+        onError={(err) => console.error(err)}
+        onScan={handleScan}
+        facingMode={null}
+        deviceId={selectedDeviceId}
+        style={{ width: '100%' }}
+      />
     </div>
   );
-};
-
-export default QrScanner;
+}
