@@ -1,4 +1,3 @@
-
 import './App.css';
 import QrReader from 'react-qr-scanner'
 import React,{useState} from 'react';
@@ -20,6 +19,7 @@ function App() {
       <div>{data}</div>
      <QrReader
        delay={300}
+       facingMode="environment"
        onError={handleError}
        onScan={handleScan}
        style={{width: '100%'}}
