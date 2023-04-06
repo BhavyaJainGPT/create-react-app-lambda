@@ -14,7 +14,7 @@ function App() {
 
  const handleDevicesFound = (devices) => {
   setAvailableDevices(devices);
-  setActiveDeviceId(devices[0]?.deviceId);
+  setActiveDeviceId(devices[0].deviceId);
  }
 
   const handleScan = (data) => {
