@@ -19,6 +19,7 @@ function App() {
       <div>{data}</div>
      <QrReader
        delay={300}
+       video={true}
        constraints={{
         facingMode: "environment"
     }}
