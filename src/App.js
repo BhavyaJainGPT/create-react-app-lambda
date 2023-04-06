@@ -1,54 +1,37 @@
-import React, { useState, useRef, useEffect } from "react";
-import QrReader from "react-qr-scanner";
+import React, { useState, useEffect, useRef } from 'react';
 
 const QrScanner = () => {
-  const [camera, setCamera] = useState("environment");
-  const videoRef = useRef();
-
-  const handleScan = (result) => {
-    if (result) {
-      alert(result.text);
-    }
-  };
-
-  const handleError = (err) => {
-    console.error(err);
-  };
-
-  const switchCamera = () => {
-    setCamera(camera === "environment" ? "user" : "environment");
-  };
+  const [isScanning, setIsScanning] = useState(false);
+  const [cameraFacingMode, setCameraFacingMode] = useState('environment');
+  const videoRef = useRef(null);
 
   useEffect(() => {
+    const constraints = { video: { facingMode: cameraFacingMode } };
     navigator.mediaDevices
-      .enumerateDevices()
-      .then((devices) => {
-        const videoDevices = devices.filter(
-          (device) => device.kind === "videoinput"
-        );
-        console.log(videoDevices);
+      .getUserMedia(constraints)
+      .then((stream) => {
+        videoRef.current.srcObject = stream;
+        setIsScanning(true);
       })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+      .catch((error) => console.error(error));
 
-  const videoConstraints = {
-    facingMode: { exact: camera }
+    return () => {
+      if (isScanning) {
+        videoRef.current.srcObject.getTracks()[0].stop();
+      }
+    };
+  }, [isScanning, cameraFacingMode]);
+
+  const handleSwitchCamera = () => {
+    setCameraFacingMode((prevMode) =>
+      prevMode === 'environment' ? 'user' : 'environment'
+    );
   };
 
   return (
     <div>
-      <QrReader
-        delay={300}
-        onError={handleError}
-        onScan={handleScan}
-        style={{ width: "100%" }}
-        facingMode={camera}
-        videoConstraints={videoConstraints}
-        ref={videoRef}
-      />
-      <button onClick={switchCamera}>Switch Camera</button>
+      <video ref={videoRef} autoPlay={true} />
+      <button onClick={handleSwitchCamera}>Switch Camera</button>
     </div>
   );
 };
