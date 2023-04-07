@@ -50,6 +50,7 @@ const handleCameraSelecton = event => {
   return (
     <div className="App">
       <div>QR Scanner Web view test</div>
+      <div>{data}</div>
       <select id="camera-selector" value={selected} onChange={handleCameraSelecton}>
         {cameras.map(camera => (
           <option key={camera.deviceId} value={camera.deviceId}>{camera.label}</option>
@@ -68,6 +69,7 @@ const handleCameraSelecton = event => {
        />
     
       <label>Your URL is:</label>
+     
       <a href={data}>{data}</a>
     </div>
   );
