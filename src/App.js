@@ -36,9 +36,7 @@ function App() {
   return (
     <div className="App">
       <div>QR Scanner Web view test</div>
-      {selected.map((item,i) => (
-        <div>{item.label}</div>
-      ))}
+      <div>{selected[0].label}</div>
      <QrReader
      ref={qrReaderRef}
        delay={300}
