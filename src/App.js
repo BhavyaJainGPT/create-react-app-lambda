@@ -49,6 +49,8 @@ function App() {
        style={{width: '100%'}}
        />
       <div>{selected}</div>
+      <label>Your URL is:</label>
+      <a href={data}></a>
     </div>
   );
 }
