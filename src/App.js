@@ -28,7 +28,7 @@ function App() {
     const cameras = devices.filter(device => device.kind === 'videoinput')
     console.log(devices)
     console.log(devices[0])
-    setSelected(cameras[1].deviceId)
+    setSelected(cameras)
   })
   .catch((err) => {
     console.log(err);
@@ -36,8 +36,9 @@ function App() {
   return (
     <div className="App">
       <div>QR Scanner Web view test</div>
-
-      <div>{data}</div>
+      {cameras.map((item,i) => (
+        <div>{item.label}</div>
+      ))}
      <QrReader
      ref={qrReaderRef}
        delay={300}
@@ -48,7 +49,7 @@ function App() {
        onScan={handleScan}
        style={{width: '100%'}}
        />
-      <div>{selected}</div>
+    
       <label>Your URL is:</label>
       <a href={data}>{data}</a>
     </div>
