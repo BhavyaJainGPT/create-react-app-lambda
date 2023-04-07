@@ -63,7 +63,8 @@ const handleCameraSelecton = event => {
      ref={qrReaderRef}
        delay={300}
        video={true}
-       
+       activeDeviceId={selected}
+       key={selected}
        constraints={selected  && ({ audio: false, video: { deviceId: selected  } })}
        onError={handleError}
        onScan={handleScan}
