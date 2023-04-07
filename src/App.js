@@ -27,7 +27,8 @@ function App() {
   .then(devices => {
     const cameras = devices.filter(device => device.kind === 'videoinput')
     console.log(devices)
-    setSelected(cameras.deviceId)
+    console.log(devices[0])
+    setSelected(cameras[0].deviceId)
   })
   .catch((err) => {
     console.log(err);
