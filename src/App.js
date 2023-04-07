@@ -36,7 +36,7 @@ function App() {
   return (
     <div className="App">
       <div>QR Scanner Web view test</div>
-      {cameras.map((item,i) => (
+      {selected.map((item,i) => (
         <div>{item.label}</div>
       ))}
      <QrReader
