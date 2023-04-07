@@ -4,8 +4,8 @@ import React,{useRef, useState} from 'react';
 
 function App() {
   const [data,setData]= useState('');
-  const [selected, setSelected] = useState();
-  const [deviceId,setDeviceId] = useState();
+  const [selected, setSelected] = useState('');
+
   const qrReaderRef = useRef(null);
  
  
@@ -43,7 +43,7 @@ function App() {
     <div className="App">
       <div>QR Scanner Web view test</div>
       <select id="camera-selector" value={selected} onChange={HandleDeviceId}>
-      {selected && selected.map(camera => (
+      {selected !== ''  && selected.map(camera => (
           <option key={camera.deviceId} value={camera.deviceId}>{camera.label}</option>
       ))}
       </select>
