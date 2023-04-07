@@ -50,7 +50,7 @@ function App() {
        />
       <div>{selected}</div>
       <label>Your URL is:</label>
-      <a href={data}></a>
+      <a href={data}>{data}</a>
     </div>
   );
 }
