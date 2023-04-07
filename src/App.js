@@ -38,7 +38,8 @@ const handleCameraSelecton = event => {
       return videoSelect
     })
     .then((devices) => {
-      setSelected(devices[0].deviceId)
+      const camera = devices.filter((device) => device.kind === 'videoinput')
+      setSelected(camera[0].deviceId)
     })
     .catch((error) => {
       console.log(error)
@@ -46,7 +47,7 @@ const handleCameraSelecton = event => {
    
   },[])
 
-  console.log(cameras)
+  console.log(selected)
   return (
     <div className="App">
       <div>QR Scanner Web view test</div>
