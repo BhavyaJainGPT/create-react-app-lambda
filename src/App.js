@@ -40,7 +40,7 @@ function App() {
 
     setSelected(deviceId);
   }
-  console.log(selected);
+
   return (
     <div className="App">
       <div>QR Scanner Web view test</div>
@@ -54,7 +54,7 @@ function App() {
      ref={qrReaderRef}
        delay={300}
        video={true}
-       facingMode={selected ? {exact : selected} : null}
+       
        constraints={selected  && ({ audio: false, video: { deviceId: selected  } })}
        onError={handleError}
        onScan={handleScan}
