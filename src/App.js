@@ -28,7 +28,7 @@ function App() {
     const cameras = devices.filter(device => device.kind === 'videoinput')
     console.log(devices)
     console.log(devices[0])
-    setSelected(cameras[0].deviceId)
+    setSelected(cameras[1].deviceId)
   })
   .catch((err) => {
     console.log(err);
@@ -42,7 +42,7 @@ function App() {
      ref={qrReaderRef}
        delay={300}
        video={true}
-       facingMode={selected}
+       facingMode={selected ? {exact : selected} : null}
        
        onError={handleError}
        onScan={handleScan}
