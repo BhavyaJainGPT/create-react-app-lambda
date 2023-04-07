@@ -5,6 +5,7 @@ import React,{useRef, useState} from 'react';
 function App() {
   const [data,setData]= useState('');
   const [selected, setSelected] = useState();
+  const [deviceId,setDeviceId] = useState();
   const qrReaderRef = useRef(null);
  
  
@@ -29,18 +30,24 @@ function App() {
     console.log(devices)
     console.log(devices[0])
 
-    setSelected(cameras)
+    setSelected(cameras[0].deviceId)
   })
   .catch((err) => {
     console.log(err);
   })
+  const HandleDeviceId  = (event) => {
+    const deviceId = event.target.value;
+    setSelected(deviceId);
+  }
   return (
     <div className="App">
       <div>QR Scanner Web view test</div>
-     
+      <select id="camera-selector" value={selected} onChange={HandleDeviceId}>
       {selected && selected.map(camera => (
-          <div>{camera.label}</div>
+          <option key={camera.deviceId} value={camera.deviceId}>{camera.label}</option>
       ))}
+      </select>
+      
      <QrReader
      ref={qrReaderRef}
        delay={300}
