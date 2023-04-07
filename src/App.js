@@ -4,7 +4,8 @@ import React,{useRef, useState} from 'react';
 
 function App() {
   const [data,setData]= useState('');
-  const [selected, setSelected] = useState('');
+  const [allcameras,setAllCameras] = useState([])
+  const [selected, setSelected] = useState(null);
 
   const qrReaderRef = useRef(null);
  
@@ -27,9 +28,8 @@ function App() {
   navigator.mediaDevices.enumerateDevices()
   .then(devices => {
     const cameras = devices.filter(device => device.kind === 'videoinput')
-    console.log(devices)
-    console.log(devices[0])
-
+    
+    setAllCameras(cameras)
     setSelected(cameras[0].deviceId)
   })
   .catch((err) => {
@@ -37,13 +37,15 @@ function App() {
   })
   const HandleDeviceId  = (event) => {
     const deviceId = event.target.value;
+
     setSelected(deviceId);
   }
+  console.log(selected);
   return (
     <div className="App">
       <div>QR Scanner Web view test</div>
       <select id="camera-selector" value={selected} onChange={HandleDeviceId}>
-      {selected !== ''  && selected.map(camera => (
+      {allcameras && allcameras.map(camera => (
           <option key={camera.deviceId} value={camera.deviceId}>{camera.label}</option>
       ))}
       </select>
