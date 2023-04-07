@@ -55,8 +55,8 @@ const handleCameraSelecton = event => {
       <div>QR Scanner Web view test</div>
       
       <select id="camera-selector" value={selected} onChange={handleCameraSelecton}>
-        {cameras.map(camera => (
-          <option key={camera.deviceId} value={camera.deviceId}>{camera.label}</option>
+        {cameras.map((camera,index) => (
+          <option key={camera.deviceId} value={camera.deviceId}>{camera.label || `Camera ${index}`}</option>
         ))}
         
       </select>
